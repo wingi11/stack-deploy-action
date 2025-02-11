@@ -69,11 +69,11 @@ if [[ -n "${INPUT_REGISTRY_USER}" && -n "${INPUT_REGISTRY_PASS}" ]];then
     INPUT_REGISTRY_AUTH="true"
 fi
 
-EXTRA_ARGS=("--detach=false")
+EXTRA_ARGS=()
 if [[ -n "${INPUT_REGISTRY_AUTH}" ]];then
     echo -e "Adding extra arg: --with-registry-auth"
     EXTRA_ARGS+=("--with-registry-auth")
 fi
 
 echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
-docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}" "${EXTRA_ARGS[@]}"
+docker stack deploy -d false -c "${INPUT_FILE}" "${INPUT_NAME}" "${EXTRA_ARGS[@]}"
